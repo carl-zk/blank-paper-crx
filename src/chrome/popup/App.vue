@@ -1,63 +1,28 @@
-<script setup >
+<script setup lang="ts" >
 import { onMounted, reactive, computed, ref } from 'vue';
-import { useLogger } from 'vue-logger-plugin';
+import type { MenuOption } from 'naive-ui'
+import { menus } from './data'
+import { RouterView } from 'vue-router';
 
-const log = useLogger()
-const myColor = ref('#3aa757')
-
-async function changeBackgroundColor() {
-  log.info('enter changeBackgroundColor');
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  log.info('changeBackgroundColor tab is ..', tab)
-  if (tab.url?.startsWith('chrome:')) {
-    log.info('ignore', tab.url)
-    return
-  }
-  try {
-    log.info('start')
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setPageBackgroundColor
-    });
-  } catch (error) {
-    log.error(error)
-    // log.error('executeScript err {}', error);
-  }
-  log.info('end')
-}
-
-function setPageBackgroundColor() {
-  chrome.storage.sync.get("color", ({ color }) => {
-    // can't use `log` here
-    console.info('enter setBackgroundColor');
-    document.body.style.backgroundColor = color;
-  });
-}
-
-onMounted(() => {
-  chrome.storage.sync.get("color", ({ color }) => {
-    myColor.value = color
-  })
-})
+const activeKey = ref<string | null>(null)
+const collapsed = ref(true)
+const menuOptions: MenuOption[] = menus
 </script>
 
 <template>
-  <button id="changeColor" :style="{ 'background-color': myColor }" @click="changeBackgroundColor" />
+  <n-space vertical size="large">
+    <n-layout has-sider>
+      <n-layout-sider bordered collapse-mode="width" :collapsed-width="64" :width="240" :collapsed="collapsed"
+        show-trigger @collapse="collapsed = true" @expand="collapsed = false">
+        <n-menu v-model:value="activeKey" :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22"
+          :options="menuOptions" :default-expanded-keys="['dance-dance-dance']" />
+      </n-layout-sider>
+      <n-layout content-style="padding: 10px">
+        <router-view></router-view>
+      </n-layout>
+    </n-layout>
+  </n-space>
 </template>
 
 <style scoped lang="scss">
-button {
-  height: 30px;
-  width: 30px;
-  outline: none;
-  margin: 10px;
-  border: none;
-  border-radius: 2px;
-}
-
-button.current {
-  box-shadow: 0 0 0 2px white,
-    0 0 0 4px black;
-}
 </style>

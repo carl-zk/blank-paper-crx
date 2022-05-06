@@ -1,7 +1,9 @@
 {
-  "name": "Translator Go",
-  "version": "0.0.2",
-  "description": "auto translate any language to Chinese 中文翻译",
+  "name": "Blank Paper",
+  "version": "0.0.1",
+  "description": "play ground",
+  "author": "carl-zk",
+  "homepage_url": "https://github.com/carl-zk/blank-paper-crx",
   "permissions": [
     "contextMenus",
     "storage",
@@ -14,7 +16,7 @@
     "service_worker": "/chrome/background.js"
   },
   "action": {
-    "default_title": "Translator Go",
+    "default_title": "Blank Paper",
     "default_popup": "/chrome/popup/index.html",
     "default_icon": {
       "16": "images/icon16.png",
@@ -24,10 +26,10 @@
     }
   },
   "icons": {
-    "16": "/images/get_started16.png",
-    "32": "/images/get_started32.png",
-    "48": "/images/get_started48.png",
-    "128": "/images/get_started128.png"
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
   },
   "options_page": "/chrome/option/index.html",
   "manifest_version": 3

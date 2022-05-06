@@ -8,18 +8,24 @@
     "preview": "vite preview",
     "pro": "vue-tsc --noEmit && vite build --mode production"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vue-router": "^4.0.15"
+  },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "@types/node": "^17.0.31",
+    "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^2.3.1",
+    "naive-ui": "^2.28.2",
     "rollup-plugin-esbuild": "^4.9.1",
-    "vue-logger-plugin": "^2.2.2",
     "sass": "^1.51.0",
     "typescript": "^4.5.4",
+    "unplugin-vue-components": "^0.19.3",
+    "vfonts": "^0.0.3",
     "vite": "^2.9.7",
     "vite-aliases": "^0.9.2",
     "vue": "^3.2.25",
+    "vue-logger-plugin": "^2.2.2",
     "vue-tsc": "^0.34.7"
   }
 }

@@ -2,6 +2,8 @@ import { defineConfig, loadEnv, LogLevel, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { ViteAliases } from 'vite-aliases'
+import Components from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
 const root = resolve(__dirname, 'src')
 const outDir = resolve(__dirname, 'dist')
@@ -29,19 +31,17 @@ export default defineConfig(({ command, mode }) => {
     },
     root,
     base: env.BASE_URL,
-    plugins: [vue(), ViteAliases(), splitVendorChunkPlugin()],
+    plugins: [vue(), ViteAliases(), splitVendorChunkPlugin(), Components({ resolvers: [NaiveUiResolver()] })],
     build: {
       outDir,
       emptyOutDir: true,
       minify: prod,
       rollupOptions: {
         input: entries,
-        // external: ['@popup/App.vue', '/src/main.ts'],
-        // plugins: [ViteAliases()],
         output: [{
-          assetFileNames: "assets/[name]-[hash].[ext]",
-          chunkFileNames: "assets/[name]-[hash].js",
-          entryFileNames: "chrome/[name].js",
+          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+          chunkFileNames: "assets/js/[name]-[hash].js",
+          entryFileNames: (info) => (['option', 'popup'].includes(info.name) ? "chrome/[name]/[name].js" : "chrome/[name].js"),
           preserveModules: false,
           compact: prod,
         }],
@@ -52,7 +52,7 @@ export default defineConfig(({ command, mode }) => {
         include: '/src/**/*'
       }
     },
-    publicDir: 'assets',
+    publicDir: 'public',
     json: {
       stringify: true
     },

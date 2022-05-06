@@ -1,14 +1,18 @@
-# Translator-go-crx
+# Blank-paper-crx
 
 > chrome translator extension  
 > refactor in Vue 3
+> add anything I want
 
 ## Get start
 
 `npm install`  
 `npm run dev`
 
-ps: `npm add -D xxx`
+## Framworks used
+
+[https://www.naiveui.com/zh-CN/dark/docs/installation](https://www.naiveui.com/zh-CN/dark/docs/installation)
+[https://www.xicons.org/#/](https://www.xicons.org/#/)
 
 ## Reference
 

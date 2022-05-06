@@ -13,10 +13,10 @@ let app = APP_ENV
   <br />
   <a href="/chrome/option/index.html">option</a>
   <br />
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <!-- <img alt="Vue logo" src="./public/logo.png" /> -->
   <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   <!-- <Popup /> -->
-<a>{{ baseUrl }}, {{ app }}, 'aaa'</a>
+  <a>{{ baseUrl }}, {{ app }}, 'aaa'</a>
 </template>
 
 <style>
