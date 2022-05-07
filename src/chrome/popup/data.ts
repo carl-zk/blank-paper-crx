@@ -4,7 +4,10 @@ import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon,
-  HomeOutline as HomeIcon
+  HomeOutline as HomeIcon,
+  CalendarNumberOutline,
+  LogoChrome,
+  AlarmOutline
 } from '@vicons/ionicons5'
 import { createRouter, createWebHistory, RouterLink } from 'vue-router'
 
@@ -31,25 +34,26 @@ export const menus = [
       { default: () => '改背景色' }
     ),
     key: '123',
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(LogoChrome)
   },
   {
-    label: '1973年的弹珠玩具',
-    key: 'pinball-1973',
-    icon: renderIcon(BookIcon),
-    disabled: true,
-    children: [
+    label: () => h(
+      RouterLink,
       {
-        label: '鼠',
-        key: 'rat'
-      }
-    ]
+        to: {
+          name: 'calendar',
+        }
+      },
+      { default: () => '日历' }
+    ),
+    key: 'calendar',
+    icon: renderIcon(CalendarNumberOutline),
   },
   {
-    label: '寻羊冒险记',
+    label: 'alarm',
     key: 'a-wild-sheep-chase',
     disabled: true,
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(AlarmOutline)
   },
   {
     label: '舞，舞，舞',
@@ -110,6 +114,11 @@ export const router = createRouter({
       name: 'changeColor',
       alias: ['/chrome/popup/index.html'],
       component: () => import('./component/ChangeColor.vue')
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: () => import('./component/Calendar.vue')
     }
   ],
   history: createWebHistory()

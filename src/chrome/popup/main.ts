@@ -5,7 +5,6 @@ import 'vfonts/Lato.css'
 // import 'vfonts/FiraCode.css'
 import { router } from './data'
 
-
 const prod = import.meta.env.PROD
 let log = createLogger({ enabled: true, level: prod ? 'error' : 'debug' })
 
