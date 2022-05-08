@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, reactive, computed, ref } from 'vue';
 import { useLogger } from 'vue-logger-plugin';
 
@@ -17,12 +17,11 @@ async function changeBackgroundColor() {
   try {
     log.info('start')
     chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setPageBackgroundColor
+      target: { tabId: tab.id! },
+      func: setPageBackgroundColor
     });
   } catch (error) {
-    log.error(error)
-    // log.error('executeScript err {}', error);
+    log.error('executeScript err {}', error);
   }
   log.info('end')
 }

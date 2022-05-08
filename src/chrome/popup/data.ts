@@ -112,11 +112,11 @@ export const router = createRouter({
     {
       path: '/changeColor',
       name: 'changeColor',
-      alias: ['/chrome/popup/index.html'],
       component: () => import('./component/ChangeColor.vue')
     },
     {
       path: '/calendar',
+      alias: ['/chrome/popup/index.html'],
       name: 'calendar',
       component: () => import('./component/Calendar.vue')
     }

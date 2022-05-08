@@ -17,7 +17,9 @@ export default defineConfig(({ command, mode }) => {
   const entries = {
     option: resolve(__dirname, 'src/chrome/option', 'index.html'),
     popup: resolve(__dirname, 'src/chrome/popup', 'index.html'),
-    background: resolve(__dirname, 'src/chrome/background.js'),
+    background: resolve(__dirname, 'src/chrome/background.ts'),
+    content: resolve(__dirname, 'src/chrome/content.ts'),
+    calendarHelper: resolve(__dirname, 'src/chrome/popup/component/CalendarHelper.ts')
   }
 
   if (mode === 'development') {
@@ -39,9 +41,17 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         input: entries,
         output: [{
-          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
-          chunkFileNames: "assets/js/[name]-[hash].js",
-          entryFileNames: (info) => (['option', 'popup'].includes(info.name) ? "chrome/[name]/[name].js" : "chrome/[name].js"),
+          assetFileNames: (info) => ['Calendar'].includes(info.name) ? 'assets/[ext]/[name].[ext]' : "assets/[ext]/[name]-[hash].[ext]",
+          chunkFileNames: (info) => ['Calendar'].includes(info.name) ? 'assets/js/[name].js' : "assets/js/[name]-[hash].js",
+          entryFileNames: (info) => {
+            if (['option', 'popup'].includes(info.name)) {
+              return "chrome/[name]/[name].js"
+            } else if (['calendarHelper'].includes(info.name)) {
+              return "chrome/popup/[name].js"
+            } else {
+              return "chrome/[name].js"
+            }
+          },
           preserveModules: false,
           compact: prod,
         }],

@@ -12,6 +12,18 @@
     "tabs",
     "scripting"
   ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["chrome/content.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["chrome/popup/calendarHelper.js"],
+      "all_frames": true
+    }
+  ],
   "background": {
     "service_worker": "/chrome/background.js"
   },

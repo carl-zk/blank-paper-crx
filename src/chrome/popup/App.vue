@@ -1,6 +1,6 @@
 <script setup lang="ts" >
 import { onMounted, reactive, computed, ref } from 'vue';
-import type { MenuOption } from 'naive-ui'
+import type { MenuOption, NLoadingBarProvider } from 'naive-ui'
 import { menus } from './data'
 import { RouterView } from 'vue-router';
 
@@ -18,7 +18,9 @@ const menuOptions: MenuOption[] = menus
           :options="menuOptions" :default-expanded-keys="['dance-dance-dance']" />
       </n-layout-sider>
       <n-layout content-style="padding: 10px">
-        <router-view></router-view>
+        <n-loading-bar-provider>
+          <router-view></router-view>
+        </n-loading-bar-provider>
       </n-layout>
     </n-layout>
   </n-space>
