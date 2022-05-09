@@ -1,9 +1,19 @@
 <script setup lang="ts">
 import { onMounted, reactive, computed, ref } from 'vue';
 import { useLogger } from 'vue-logger-plugin';
+import { defineStore } from 'pinia'
 
 const log = useLogger()
-const myColor = ref('#3aa757')
+const useColorStore = defineStore('color', () => {
+  const myColor = ref('#3aa757')
+  function changeColor(color: string) {
+    myColor.value = color
+    localStorage.setItem('color', color)
+  }
+  return { myColor, changeColor }
+})
+
+const colorStore = useColorStore()
 
 async function changeBackgroundColor() {
   log.info('enter changeBackgroundColor');
@@ -36,7 +46,7 @@ function setPageBackgroundColor() {
 
 onMounted(() => {
   chrome.storage.sync.get("color", ({ color }) => {
-    myColor.value = color
+    colorStore.changeColor(color)
   })
 })
 </script>
@@ -44,7 +54,7 @@ onMounted(() => {
 <template>
   <div class="content">
     <p>click this to change a web background color</p>
-    <button id="changeColor" :style="{ 'background-color': myColor }" @click="changeBackgroundColor" />
+    <button id="changeColor" :style="{ 'background-color': colorStore.myColor }" @click="changeBackgroundColor" />
     <p>this is chrome extension demo <a href="https://developer.chrome.com/docs/extensions/mv3/getstarted/">Getting
         started</a> </p>
   </div>
@@ -66,7 +76,7 @@ button.current {
 }
 
 .content {
-  min-width: 300px;
-  min-height: 200px;
+  min-width: 700px;
+  min-height: 400px;
 }
 </style>

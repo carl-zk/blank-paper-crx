@@ -1,6 +1,6 @@
 <script setup lang="ts" >
 import { onMounted, reactive, computed, ref } from 'vue';
-import type { MenuOption, NLoadingBarProvider } from 'naive-ui'
+import type { MenuOption } from 'naive-ui'
 import { menus } from './data'
 import { RouterView } from 'vue-router';
 
@@ -19,7 +19,17 @@ const menuOptions: MenuOption[] = menus
       </n-layout-sider>
       <n-layout content-style="padding: 10px">
         <n-loading-bar-provider>
-          <router-view></router-view>
+          <n-message-provider>
+            <n-notification-provider>
+              <n-dialog-provider>
+                <router-view v-slot="{ Component }">
+                  <keep-alive>
+                    <component :is="Component" />
+                  </keep-alive>
+                </router-view>
+              </n-dialog-provider>
+            </n-notification-provider>
+          </n-message-provider>
         </n-loading-bar-provider>
       </n-layout>
     </n-layout>

@@ -7,7 +7,9 @@ import {
   HomeOutline as HomeIcon,
   CalendarNumberOutline,
   LogoChrome,
-  AlarmOutline
+  AlarmOutline,
+  ColorFillOutline,
+  Cog
 } from '@vicons/ionicons5'
 import { createRouter, createWebHistory, RouterLink } from 'vue-router'
 
@@ -19,22 +21,22 @@ export function renderIcon(icon: Component) {
 
 export const menus = [
   {
-    label: '首页',
-    key: 'home',
-    icon: renderIcon(HomeIcon)
-  },
-  {
     label: () => h(
       RouterLink,
       {
         to: {
-          name: 'changeColor',
+          name: 'home'
         }
       },
-      { default: () => '改背景色' }
+      { default: () => '首页' }
     ),
-    key: '123',
-    icon: renderIcon(LogoChrome)
+    key: 'home',
+    icon: renderIcon(HomeIcon)
+  },
+  {
+    label: 'alarm',
+    key: 'a-wild-sheep-chase',
+    icon: renderIcon(AlarmOutline)
   },
   {
     label: () => h(
@@ -50,10 +52,25 @@ export const menus = [
     icon: renderIcon(CalendarNumberOutline),
   },
   {
-    label: 'alarm',
-    key: 'a-wild-sheep-chase',
-    disabled: true,
-    icon: renderIcon(AlarmOutline)
+    label: '工具',
+    key: 'tools',
+    icon: renderIcon(Cog),
+    children: [
+      {
+        type: 'chrome',
+        label: () => h(
+          RouterLink,
+          {
+            to: {
+              name: 'changeColor',
+            }
+          },
+          { default: () => '改背景色' }
+        ),
+        key: 'changeColor',
+        icon: renderIcon(ColorFillOutline),
+      }
+    ]
   },
   {
     label: '舞，舞，舞',
@@ -110,13 +127,18 @@ export const menus = [
 export const router = createRouter({
   routes: [
     {
+      path: '/home',
+      alias: ['/chrome/popup/index.html'],
+      name: 'home',
+      component: () => import('./component/Home.vue')
+    },
+    {
       path: '/changeColor',
       name: 'changeColor',
       component: () => import('./component/ChangeColor.vue')
     },
     {
       path: '/calendar',
-      alias: ['/chrome/popup/index.html'],
       name: 'calendar',
       component: () => import('./component/Calendar.vue')
     }

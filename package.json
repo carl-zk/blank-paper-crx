@@ -1,7 +1,7 @@
 {
-  "name": "translator-go-crx",
+  "name": "blank-paper-crx",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --mode development --watch",
@@ -9,6 +9,7 @@
     "pro": "vue-tsc --noEmit && vite build --mode production"
   },
   "dependencies": {
+    "pinia": "^2.0.14",
     "vue-router": "^4.0.15"
   },
   "devDependencies": {

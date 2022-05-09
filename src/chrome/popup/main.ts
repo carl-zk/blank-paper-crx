@@ -1,11 +1,13 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import { createPinia } from 'pinia'
 import { createLogger } from 'vue-logger-plugin'
+import App from './App.vue'
 import 'vfonts/Lato.css'
-// import 'vfonts/FiraCode.css'
+import 'vfonts/FiraCode.css'
 import { router } from './data'
 
 const prod = import.meta.env.PROD
-let log = createLogger({ enabled: true, level: prod ? 'error' : 'debug' })
+const log = createLogger({ enabled: true, level: prod ? 'error' : 'debug' })
+const pinia = createPinia()
 
-createApp(App).use(log).use(router).mount('#app')
+createApp(App).use(pinia).use(log).use(router).mount('#app')

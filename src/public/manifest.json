@@ -19,7 +19,7 @@
       "all_frames": true
     },
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://wannianrili.bmcx.com/*"],
       "js": ["chrome/popup/calendarHelper.js"],
       "all_frames": true
     }

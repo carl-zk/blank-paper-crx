@@ -1,17 +1,24 @@
-function clickDate(event: Event) {
-  console.log('calendar click', event);
+function clickDate(event: Event, date: string) {
+  chrome.runtime.sendMessage({ clicked_date: date }, function (response) {
+    console.log(response.farewell);
+  });
 }
 
-let jie_guo = document.querySelector('#jie_guo')!
-console.log('jie_guo', jie_guo);
+function bindAllClickEvent() {
+  let riqi_list = document.querySelectorAll('div.wnrl_riqi')!
+  riqi_list.forEach(riqi => {
+    if (!riqi.getAttribute('isBind')) {
+      riqi.setAttribute('isBind', 'true')
+      let href = riqi.querySelector('a')?.getAttribute('href')!
+      let date = href.match(/\d{4}-\d{2}-\d{2}/)![0]
+      riqi.addEventListener('mouseup', (event) => clickDate(event, date), false)
+    }
+  })
+}
 
-let riqi_list = document.querySelectorAll('div.wnrl_riqi')!
-console.log('riqi_list ', riqi_list);
+bindAllClickEvent()
 
-riqi_list.forEach(riqi => { riqi.addEventListener('mousedown', clickDate, false) })
-
-document.addEventListener("mouseup", (event) => {
-  console.log(event)
-})
+document.removeEventListener("mousedown", (event) => { bindAllClickEvent() })
+document.addEventListener("mousedown", (event) => { bindAllClickEvent() })
 
 export { }
