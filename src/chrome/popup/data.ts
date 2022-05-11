@@ -34,8 +34,16 @@ export const menus = [
     icon: renderIcon(HomeIcon)
   },
   {
-    label: 'alarm',
-    key: 'a-wild-sheep-chase',
+    label: () => h(
+      RouterLink,
+      {
+        to: {
+          name: 'alarm'
+        }
+      },
+      { default: () => '闹钟' }
+    ),
+    key: 'alarm',
     icon: renderIcon(AlarmOutline)
   },
   {
@@ -136,6 +144,11 @@ export const router = createRouter({
       path: '/changeColor',
       name: 'changeColor',
       component: () => import('./component/ChangeColor.vue')
+    },
+    {
+      path: '/alarm',
+      name: 'alarm',
+      component: () => import('./component/Alarm.vue')
     },
     {
       path: '/calendar',

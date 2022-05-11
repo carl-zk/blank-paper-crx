@@ -21,3 +21,4 @@
 [https://developer.chrome.com/docs/extensions/mv3/getstarted/](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
 [https://www.jeffreyknox.dev/blog/dropping-webpack-for-vite-part-1/](https://www.jeffreyknox.dev/blog/dropping-webpack-for-vite-part-1/)
 [客户端存储 Web Storage and IndexedDB](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage)
+[闹钟](https://cssanimation.rocks/clocks/)
